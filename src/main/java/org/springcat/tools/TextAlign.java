@@ -68,7 +68,7 @@ public class TextAlign {
     public List<List<String>> parseText(String text,int limit){
         List<List<String>> table = new ArrayList<>();
 
-        List<String> rows = StrUtil.split(text, '\n');
+        List<String> rows = StrUtil.splitTrim(text, '\n');
         for (String row : rows) {
             if(StrUtil.isBlank(row)){
                 continue;

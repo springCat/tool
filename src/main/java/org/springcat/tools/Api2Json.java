@@ -25,8 +25,10 @@ public class Api2Json {
 
     private void handle(String request) {
 
+        request = StrUtil.replace(request,"\t"," ");
+
         //request
-        List<String> requestRows = StrUtil.split(request, '\n');
+        List<String> requestRows = StrUtil.splitTrim(request, '\n');
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("{\n");
@@ -35,7 +37,7 @@ public class Api2Json {
             if (StrUtil.isBlank(row)) {
                 continue;
             }
-            List<String> columns = StrUtil.split(row, '\t');
+            List<String> columns = StrUtil.splitTrim(row, ' ');
             String name = CollectionUtil.get(columns, 0);
             String must = CollectionUtil.get(columns, 1);
             String parent = CollectionUtil.get(columns, 2);

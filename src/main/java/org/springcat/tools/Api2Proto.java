@@ -17,27 +17,16 @@ import java.util.List;
  */
 public class Api2Proto {
 
-    private String apiName = "getDiscoverTabTop";
-
-    private String request = "tabId\tY\tRequest\tlong\tTAB ID";
-
-    private String response = "discoverTabTopList\t1\tresponse\tList\t\n" +
-            "discoverTabTop\t0..N\tdiscoverTabTopList\tDiscoverTabTop\t\n" +
-            "contentId\t1\tdiscoverTabTop\tlong\t内容id\n" +
-            "contentType\t1\tdiscoverTabTop\tstring\t内容类型\n" +
-            "showTopSign\t1\tdiscoverTabTop\tint\t是否显示置顶表示 0 不显示，1显示\n" +
-            "setTopNo\t1\tdiscoverTabTop\tint\t置顶序号\n";
-
     public static void main(String[] args) throws ParseException {
 
 
         String str = ClipboardUtil.getStr();
-        String[] parts = StrUtil.split(str, "\n\n");
+        List<String> parts = StrUtil.splitTrim(str, "\n\n");
 
 
-        String apiName = ArrayUtil.get(parts,0);
-        String request = ArrayUtil.get(parts,1);
-        String response = ArrayUtil.get(parts,2);
+        String apiName = CollectionUtil.get(parts,0);
+        String request = CollectionUtil.get(parts,1);
+        String response = CollectionUtil.get(parts,2);
 
         if(StrUtil.isBlank(apiName) || StrUtil.isBlank(request) || StrUtil.isBlank(response)){
             return;
@@ -48,6 +37,9 @@ public class Api2Proto {
     }
 
     private void handle(String apiName, String request, String response) {
+
+        request = StrUtil.replace(request,"\t"," ");
+        response = StrUtil.replace(response,"\t"," ");
 
         //初始化类型映射
         Dict typeDict = new Dict();
@@ -68,7 +60,7 @@ public class Api2Proto {
             if (StrUtil.isBlank(row)) {
                 continue;
             }
-            List<String> columns = StrUtil.split(row, '\t');
+            List<String> columns = StrUtil.splitTrim(row, ' ');
             String name = CollectionUtil.get(columns, 0);
             String must = CollectionUtil.get(columns, 1);
             String parent = CollectionUtil.get(columns, 2);
@@ -90,7 +82,7 @@ public class Api2Proto {
             if (StrUtil.isBlank(row)) {
                 continue;
             }
-            List<String> columns = StrUtil.split(row, '\t');
+            List<String> columns = StrUtil.splitTrim(row, ' ');
             String name = CollectionUtil.get(columns, 0);
             String must = CollectionUtil.get(columns, 1);
             String parent = CollectionUtil.get(columns, 2);
@@ -104,6 +96,7 @@ public class Api2Proto {
         }
         println("}");
         toFile(apiName + ".proto");
+        System.out.println(stringBuilder.toString());
         ClipboardUtil.setStr(stringBuilder.toString());
     }
 

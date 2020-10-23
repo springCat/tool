@@ -1,5 +1,6 @@
 package org.springcat.tools;
 
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.swing.clipboard.ClipboardUtil;
 import cn.hutool.core.util.ArrayUtil;
@@ -19,10 +20,10 @@ public class RepeatN {
 
         String str = ClipboardUtil.getStr();
 
-        String[] parts = StrUtil.split(str, "\n\n");
+        List<String> parts = StrUtil.splitTrim(str, "\n\n");
 
-        String template = ArrayUtil.get(parts,0);
-        int n = Convert.toInt(ArrayUtil.get(parts,1),3);
+        String template = CollectionUtil.get(parts,0);
+        int n = Convert.toInt(CollectionUtil.get(parts,1),3);
 
         boolean containsSeq = false;
         int len = 0;
