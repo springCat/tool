@@ -47,7 +47,6 @@ public class TemplateFormat {
         StringReader templateReader = StrUtil.getReader(csvData);
         CsvReadConfig config =  CsvReadConfig.defaultConfig();
         config.setSkipEmptyRows(true);
-        config.setFieldSeparator(' ');
         config.setContainsHeader(true);
         CsvReader csvReader = new CsvReader(templateReader,config);
         CsvData read = csvReader.read();

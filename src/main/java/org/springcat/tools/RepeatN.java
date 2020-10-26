@@ -27,7 +27,7 @@ public class RepeatN {
 
         boolean containsSeq = false;
         int len = 0;
-        if(ReUtil.contains("(#\\{i,)(\\d)(\\})",template) || ReUtil.contains("(#\\{i,)(\\})",template)){
+        if(ReUtil.contains("(#\\{i,)(\\d)(\\})",template) || ReUtil.contains("($\\{i,)(\\})",template)){
             containsSeq = true;
             len = Convert.toInt(ReUtil.extractMulti("(#\\{i,)(\\d)(\\})", template, "$2"),0);
         }
