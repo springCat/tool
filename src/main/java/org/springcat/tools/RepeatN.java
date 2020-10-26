@@ -27,9 +27,9 @@ public class RepeatN {
 
         boolean containsSeq = false;
         int len = 0;
-        if(ReUtil.contains("(#\\{i,)(\\d)(\\})",template) || ReUtil.contains("($\\{i,)(\\})",template)){
+        if(ReUtil.contains("(\\$\\{i,)(\\d)(\\})",template) || ReUtil.contains("(\\$\\{i,)(\\})",template)){
             containsSeq = true;
-            len = Convert.toInt(ReUtil.extractMulti("(#\\{i,)(\\d)(\\})", template, "$2"),0);
+            len = Convert.toInt(ReUtil.extractMulti("(\\$\\{i,)(\\d)(\\})", template, "$2"),0);
         }
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -40,7 +40,7 @@ public class RepeatN {
                 if(len > 0){
                     seqFormat = StrUtil.padPre(seqFormat,len,'0');
                 }
-                String temp = ReUtil.replaceAll(template,"(#\\{i,)(\\d)(\\})",seqFormat);
+                String temp = ReUtil.replaceAll(template,"(\\$\\{i,)(\\d)(\\})",seqFormat);
                 stringBuilder.append(temp)
                         .append("\n")
                         .append("\n");
