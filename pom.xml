@@ -8,7 +8,6 @@
     <artifactId>Tools</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-
     <dependencies>
         <dependency>
             <groupId>cn.hutool</groupId>
@@ -36,10 +35,15 @@
             <version>2.3.30</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.ansj</groupId>
+            <artifactId>ansj_seg</artifactId>
+            <version>5.1.1</version>
+        </dependency>
     </dependencies>
 
     <build>
-        <finalName>TemplateFormat</finalName>
+        <finalName>SnippetCat</finalName>
         <sourceDirectory>src/main/java</sourceDirectory>
         <resources>
             <!-- 控制资源文件的拷贝 -->
